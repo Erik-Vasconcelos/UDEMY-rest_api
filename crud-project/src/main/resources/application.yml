@@ -1,0 +1,12 @@
+spring:
+  datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/crud_project?useSSL=false\
+      username: postgres
+      password: postgre2023
+  jpa: 
+    open-in-view: false
+    hibernate: 
+      ddl-auto: update
+    show-sql: false
+        
