@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.cp.PersonService;
-import br.com.erudio.cp.model.Person;
+import br.com.erudio.cp.data.vo_v1.PersonVO;
 
 @RestController
 @RequestMapping("/person")
@@ -26,22 +26,22 @@ public class PersonController {
 	private PersonService personService;
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Person> getPerson(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<PersonVO> getPerson(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.findById(id));
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Person>> getPersons() {
+	public ResponseEntity<List<PersonVO>> getPersons() {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.findAll());
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Person> insert(@RequestBody Person person) {
+	public ResponseEntity<PersonVO> insert(@RequestBody PersonVO person) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.insert(person));
 	}
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Person> update(@PathVariable(name = "id") Long id, @RequestBody Person person) {
+	public ResponseEntity<PersonVO> update(@PathVariable(name = "id") Long id, @RequestBody PersonVO person) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.update(id, person));
 	}
 
