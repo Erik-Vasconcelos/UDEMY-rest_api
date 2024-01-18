@@ -20,7 +20,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 				request.getDescription(false), Instant.now());
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(reponse);
-
 	}
 
 	@ExceptionHandler(ObjectNotFoundException.class)

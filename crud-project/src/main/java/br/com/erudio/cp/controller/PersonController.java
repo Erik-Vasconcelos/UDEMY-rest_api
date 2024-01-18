@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.cp.PersonService;
 import br.com.erudio.cp.data.vo_v1.PersonVO;
+import br.com.erudio.cp.data.vo_v2.PersonVOV2;
 
 @RestController
 @RequestMapping("/person")
@@ -40,6 +41,11 @@ public class PersonController {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.insert(person));
 	}
 
+	@PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PersonVOV2> insertV2(@RequestBody PersonVOV2 person) {
+		return ResponseEntity.status(HttpStatus.OK).body(personService.insertV2(person));
+	}
+	
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PersonVO> update(@PathVariable(name = "id") Long id, @RequestBody PersonVO person) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.update(id, person));
