@@ -1,0 +1,17 @@
+server:
+  port: 8888
+cors:
+  origenPatterns: http://localhost:3000,http://localhost:8080,https://erudio.com.br
+spring:
+  datasource:
+      driver-class-name: org.postgresql.Driver
+  jpa: 
+    open-in-view: false
+    hibernate: 
+      ddl-auto: update
+    show-sql: false
+        
+springdoc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
