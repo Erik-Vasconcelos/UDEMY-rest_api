@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,38 +14,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.erudio.cp.PersonService;
 import br.com.erudio.cp.data.vo_v1.PersonVO;
-import br.com.erudio.cp.data.vo_v2.PersonVOV2;
+import br.com.erudio.cp.service.PersonService;
+import br.com.erudio.cp.util.MediaType;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/person/v1")
 public class PersonController {
 
 	@Autowired
 	private PersonService personService;
 
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YAML })
 	public ResponseEntity<PersonVO> getPerson(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.findById(id));
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
 	public ResponseEntity<List<PersonVO>> getPersons() {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.findAll());
 	}
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YAML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+					MediaType.APPLICATION_YAML })
 	public ResponseEntity<PersonVO> insert(@RequestBody PersonVO person) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.insert(person));
 	}
 
-	@PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PersonVOV2> insertV2(@RequestBody PersonVOV2 person) {
-		return ResponseEntity.status(HttpStatus.OK).body(personService.insertV2(person));
-	}
-	
-	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YAML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
+					MediaType.APPLICATION_YAML })
 	public ResponseEntity<PersonVO> update(@PathVariable(name = "id") Long id, @RequestBody PersonVO person) {
 		return ResponseEntity.status(HttpStatus.OK).body(personService.update(id, person));
 	}
