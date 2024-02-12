@@ -1,0 +1,24 @@
+cors:
+  originPatterns: http://localhost:3000,http://localhost:8080,https://erudio.com.br
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 3600000
+spring:
+  datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/crud_project?useSSL=false
+      username: postgres
+      password: postgre2023
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+springdoc:
+  pathsToMatch:
+    - /auth/**
+    - /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
